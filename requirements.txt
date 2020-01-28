@@ -1,4 +1,3 @@
-app==1.0.0
 -e git+https://github.com/SHPE-at-UCI/shpesignin.git@43377a4fd7164d9721ea18acca0020be45ef3d61#egg=app.py
 autopep8==1.5
 bcrypt==3.1.7
