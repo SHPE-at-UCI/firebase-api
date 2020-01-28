@@ -26,7 +26,7 @@ Or on Windows cmd:
 
 ```
 $ py -3 -m venv venv
-$ venv\Scripts\activate.bat
+$ venv/Scripts/activate.bat
 ```
 
 Install Flask:
