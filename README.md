@@ -1,4 +1,4 @@
-# SHPE Sign In
+# SHPE at UCI Member Sign In
 
 We will be using Flasks project tutorial found [here](http://flask.palletsprojects.com/en/1.1.x/tutorial/).
 
@@ -11,7 +11,7 @@ Use the package manager [pip](https://pip.pypa.io/en/stable/) to install the dep
 Clone this project.
 
 ```bash
-$ git clone https://github.com/SHPE-at-UCI/shpesignin.git
+$ git clone https://github.com/SHPE-at-UCI/shpesignin
 $ cd shpesignin
 ```
 
@@ -29,41 +29,21 @@ $ py -3 -m venv venv
 $ venv\Scripts\activate.bat
 ```
 
-Install Dependencies:
+Install Flask:
 
 ```
 $ pip install -e .
 ```
-### Running Flask
 
-For Linux and Mac:
-
+Run Flask
 ```
-$ export FLASK_APP=flaskr
-$ export FLASK_ENV=development
-$ flask run
-```
-
-For Windows cmd, use set instead of export:
-
-```
-> set FLASK_APP=flaskr
-> set FLASK_ENV=development
-> flask run
-```
-
-For Windows PowerShell, use \$env: instead of export:
-
-```
-> $env:FLASK_APP = "flaskr"
-> $env:FLASK_ENV = "development"
-> flask run
+./runapp.sh
 ```
 
 You’ll see output similar to this:
 
 ```
-* Serving Flask app "flaskr"
+* Serving Flask app
 * Environment: development
 * Debug mode: on
 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
@@ -73,10 +53,10 @@ You’ll see output similar to this:
 ```
 
 Stop Virtual Environment
+
 ```
 $ deactivate
 ```
-
 
 ### Contributing
 
@@ -85,7 +65,8 @@ We use a feature branch workflow.
 Step 1: Create a new branch
 
 ```
-git checkout -b <milestone_milestone#_issue>
+git checkout -b <feature_milestone#>
+Examples: git checkout -b Login_Feature_1.1
 ```
 
 Step 2: Update, add, commit, and push changes
@@ -103,11 +84,16 @@ git push -u origin new-feature
 Step 4: Create a pull request
 ```
 
-### Development
+## Development
 
 Create a pull request(PR) on the master branch.
 Once the PR is approved, the owner of the PR merges the pull request into master branch.
-In the future we will have continuous deployments. 
+In the future we will have continuous deployments.
+
+## Tutorial
+
+Made by Guillermo Hernandez - SHPE Technical Program Manager
+[Link](https://www.youtube.com/watch?v=T0Ml5WnQbJY&feature=youtu.be)
 
 ## License
 
