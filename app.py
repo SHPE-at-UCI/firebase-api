@@ -22,6 +22,10 @@ def read():
 def update():
     return "Update"
 
+@app.route("/thank-you")
+def success_page():
+    return render_template("thank-you.html")
+
 
 @app.route("/delete")
 def delete():
