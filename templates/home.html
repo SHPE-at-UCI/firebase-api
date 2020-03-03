@@ -27,43 +27,42 @@
 
 <body style="background-color:#E6E6FA">  
     <div class="container">        
-        <div class="row row row-cols-2">         
-                                        
-            <div class="col-6">
-            <div class="dropdown float-right" style="margin-right:35px">           
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Meeting
-                </button>        
-                
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item disabled" href="#">General Meeting</a>
-                <a class="dropdown-item" href="#">Tech Committee</a>
-                <a class="dropdown-item disabled" href="#">SHPEtinas</a>
-                </div>    
-            </div>
-        </div>  
-                
-        <div class="col-6">     
-            <form>                
-                
-                <div class="form-group">
-                    <div class="col-6">
-                    <label for="exampleInputEmail1">Email address</label>
+        <div class="row justify-content-md-center p-3">                                                 
+            <div class="col-md-auto">
+                <div class="dropdown float-right" style="margin-right:100px">           
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Meeting
+                    </button>        
+                    
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item disabled" href="#">General Meeting</a>
+                    <a class="dropdown-item" href="#">Tech Committee</a>
+                    <a class="dropdown-item disabled" href="#">SHPEtinas</a>
+                    </div>    
                 </div>
-                <div class="col-6">
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"  placeholder="example@uci.edu">
-                <small id="emailHelp" class="form-text text-muted">Use your UCI email to sign in.</small>
-                                
-                <button type="submit" class="btn btn-primary">I'm here!</button>
-                </div>
-            </div>
-                            
-            
-                
-            </form>
+            </div>  
         </div>
-    </div>
-    </div>
+        <div class="row justify-content-md-center p-3">
+            <div class="col-md-auto">     
+                <form method = "POST">                                
+                    <div class="form-group">                        
+                        <label for="exampleInputEmail1">Email address</label>                        
+                        <input type="email" class="form-control" id="emailInput" name="emailInput" pattern="[a-zA-Z0-9]+@uci[.]edu"
+                        aria-describedby="emailHelp"  placeholder="example@uci.edu" required>
+                        <div class="invalid-feedback">
+                            Please enter your UCI email.
+                        </div>
+
+                        <small id="emailHelp" class="form-text text-muted">Use your UCI email to sign in.</small>                
+                                        
+                        <div class="row p-3">
+                            <button type="submit" class="btn btn-primary">I'm here!</button>                        
+                        </div>
+                    </div>                
+                </form>
+            </div>
+        </div> 
+    </div>   
 </body>
 
 {% endblock %}
