@@ -43,23 +43,52 @@
             <div class="col-3"></div>
         </div>
 
-        <label for="email">UCI Email:</label><br>
-        <input type="text" id="email" name="email" placeholder="panteater@uci.edu" title="Must Use Your UCI Email, e.g. _______@uci.edu" pattern="[A-Za-z0-9]{1,}@uci.edu" size="66" required><br>
+        <div class="row">
+            <div class="col-3"></div>
+            <div class="col-3"> <label for="email">UCI Email:</label> </div>
+            <div class="col-6"></div>
+        </div>
 
-        <label for="major">Current Major:</label><br>
-        <input type="text" id="major" name="major" placeholder="Undeclared" size="66" required><br>
+        <div class="row">
+            <div class="col-3"></div>
+            <div class="col-6"><input type="text" id="email" name="email" placeholder="panteater@uci.edu" style="width:100%;" title="Must Use Your UCI Email, e.g. _______@uci.edu" pattern="[A-Za-z0-9]{1,}@uci.edu" size="66" required></div>
+            <div class="col-3"></div>
+        </div>
+        
+        <div class="row">
+            <div class="col-3"></div>
+            <div class="col-3"> <label for="major">Current Major:</label> </div>
+            <div class="col-6"></div>
+        </div>
 
-        <label for="year">Year:</label><br>
-        <select id="year" name="year">
-            <option value="Freshman">Freshman</option>
-            <option value="Sophmore">Sophmore</option>
-            <option value="Junior">Junior</option>
-            <option value="Senior">Senior</option>
-            <option value="SuperSenior">5th Year +</option>
-            <option value="Graduate">Grad Student</option>
-        </select>
+        <div class="row">
+            <div class="col-3"></div>
+            <div class="col-6"><input type="text" id="major" name="major" placeholder="Undeclared" style="width:100%;" size="66" required></div>
+            <div class="col-3"></div>
+        </div>
 
-        <button type="submit" value="Submit">Submit</button>
+        <div class="row">
+            <div class="col-3"></div>
+            <div class="col-3"> <label for="year">Year:</label> </div>
+            <div class="col-6"></div>
+        </div>
+
+        <div class="row">
+            <div class="col-3"></div>
+            <div class="col-3"> 
+                <select id="year" name="year">
+                    <option value="Freshman">Freshman</option>
+                    <option value="Sophmore">Sophmore</option>
+                    <option value="Junior">Junior</option>
+                    <option value="Senior">Senior</option>
+                    <option value="SuperSenior">5th Year +</option>
+                    <option value="Graduate">Grad Student</option>
+                </select>
+            </div>
+            <div class="col-3"> <button type="submit" value="Submit">Submit</button> </div>
+            <div class="col-3"></div>
+        </div>
+        
         </fieldset>
     </form>
 </div>
