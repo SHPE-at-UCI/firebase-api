@@ -25,7 +25,11 @@ def update():
 @app.route("/thank-you")
 def success_page():
     return render_template("thank-you.html")
-
+# This is for registerAlt.html, which is my slow progression on using Bootstrap to make the Register Page mobile friendly #
+@app.route("/registerV2", methods=('GET','POST'))
+def improved_register():
+    return render_template("registerAlt.html")
+###########################################################################################################################
 @app.route("/register", methods=('GET','POST'))
 def register_page():
     print("Can You See This")

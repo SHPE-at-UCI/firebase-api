@@ -20,8 +20,8 @@
     <h4> Please Enter Your Info Below :) </h4>
 
     <div class="row">
-        <div class="col-lg-6" style="background-color:yellow;padding:10px;"></div>
-        <div class="col-lg-6" style="background-color:pink;padding:10px;"></div>
+        <div class="col-sm-6" style="background-color:yellow;padding:10px;"></div>
+        <div class="col-sm-6" style="background-color:pink;padding:10px;"></div>
     </div>
     <div class="row">
         <div class="col-lg-6" style="background-color:paleturquoise;padding:10px;"></div>
@@ -30,11 +30,14 @@
     <form method="post">
         <fieldset>
         <legend>Student Information:</legend>
-        
-        <label for="firstName">Full name:</label><br>
-        <input type="text" id="firstName" name="firstName" placeholder="First name" size="30" required>
-        <input type="text" id="lastName" name="lastName"placeholder="Last name" size="30" required><br>
 
+        <label for="firstName">Full name:</label><br>
+        <div class="row">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-3"><input type="text" id="firstName" name="firstName" placeholder="First name" width="100%"required></div>
+            <div class="col-sm-3"><input type="text" id="lastName" name="lastName"placeholder="Last name" required></div>
+            <div class="col-sm-3"></div>
+        </div>
 
         <label for="email">UCI Email:</label><br>
         <input type="text" id="email" name="email" placeholder="panteater@uci.edu" title="Must Use Your UCI Email, e.g. _______@uci.edu" pattern="[A-Za-z0-9]{1,}@uci.edu" size="66" required><br>
