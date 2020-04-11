@@ -16,6 +16,3 @@ build/
 
 # The . idea folder (hidden on OS X) in the solution root contains IntelliJ's project specific settings files.
 .idea/
-
-# Nothing in here for now
-static/
