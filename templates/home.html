@@ -1,8 +1,68 @@
-{% extends 'base.html' %} {% block header %}
+{% extends 'base.html' %}
+
+
+{% block header %}
+
+<h3>     
+    <div class="p-3 mb-2 bg-warning text-dark">
+        <img data-src="https://www.shpe.org/uploads/images/logos/SHPE_logo_FullColor-RGB-2x.png" class="img-thumbnail" alt="logo" src="https://www.shpe.org/uploads/images/logos/SHPE_logo_FullColor-RGB-2x.png"
+        width="100" height="100">
+        <div class="mx-auto" style="width: 200px;">SHPE SignIn</div>
+  </div>
+</h3>
+  
+{% endblock %}
+
+
 <!-- This should always go here -->
-<h1>{% block title %}Home{% endblock %}</h1>
+{% block title %} Home {% endblock %}
+
 <!-- You can change Register to anything else.-->
-{% endblock %} {% block content %}
+
+{% block content %}
+<br>
+<br>
 <!-- All your body content goes here! -->
-<h3>Content goes here</h3>
+<!-- <h3>Content goes here</h3> -->
+
+<body style="background-color:#E6E6FA">  
+    <div class="container">        
+        <div class="row justify-content-md-center p-3">                                                 
+            <div class="col-md-auto">
+                <div class="dropdown float-right" style="margin-right:100px">           
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Meeting
+                    </button>        
+                    
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item disabled" href="#">General Meeting</a>
+                    <a class="dropdown-item" href="#">Tech Committee</a>
+                    <a class="dropdown-item disabled" href="#">SHPEtinas</a>
+                    </div>    
+                </div>
+            </div>  
+        </div>
+        <div class="row justify-content-md-center p-3">
+            <div class="col-md-auto">     
+                <form method = "POST">                                
+                    <div class="form-group">                        
+                        <label for="exampleInputEmail1">Email address</label>                        
+                        <input type="email" class="form-control" id="emailInput" name="emailInput" pattern="[a-zA-Z0-9]+@uci[.]edu"
+                        aria-describedby="emailHelp"  placeholder="example@uci.edu" required>
+                        <div class="invalid-feedback">
+                            Please enter your UCI email.
+                        </div>
+
+                        <small id="emailHelp" class="form-text text-muted">Use your UCI email to sign in.</small>                
+                                        
+                        <div class="row p-3">
+                            <button type="submit" class="btn btn-primary">I'm here!</button>                        
+                        </div>
+                    </div>                
+                </form>
+            </div>
+        </div> 
+    </div>   
+</body>
+
 {% endblock %}

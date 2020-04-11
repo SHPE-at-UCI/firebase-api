@@ -3,8 +3,11 @@ import sqlite3
 app = Flask(__name__)
 
 
-@app.route("/")
-def index():
+@app.route("/", methods=('GET', 'POST'))
+def index():    
+    if request.method == 'POST':
+        email = request.form["emailInput"]                
+        return render_template('thank-you.html')
     return render_template('home.html')
 
 
