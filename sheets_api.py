@@ -36,9 +36,7 @@ def _write(Spreadsheet, Sheet, Range, Data):
 	Server-side sign-in, should only force server to sign-in once when token.pickle is invalid or non-existant, so far only my UCI account is allowed to do so. I believe that if you test this with the token.pickle and credentials.json supplied, you won't need to sign-in to my account anyway, link to accessing the spreadsheet is supplied and shared to all UCI members witht the link
 '''
 def sign_in():
-    global service, creds
-    if(creds!=None):
-        print(creds.refresh_token)    
+    global service, creds    
     if service != None:
         if(creds.expired):
             print("Credentials have expired, refreshing credentials and service")
@@ -98,9 +96,10 @@ def find(Data):
 '''
 class buffer:
     def __init__(self):
-        self.data = set()
+        self.data = set()#TODO we can change this value to be bigger, smaller values are just faster to test
+        self.flush_limit = 3
     def __str__(self):
-        return str(self.data)
+        return "flush limit "+str(self.flush_limit)+", "+str(self.data)
     def __len__(self):
         return len(self.data)
     def add(self, item):
@@ -110,8 +109,7 @@ class buffer:
        	    item = (item,)
         self.data.add(item)
     def is_filled(self):
-        #TODO we can change this value to be bigger, smaller values are just faster to test
-        return len(self)>=3
+        return len(self)>=self.flush_limit
     def process(self):
         data = self.data
         self.__init__()
