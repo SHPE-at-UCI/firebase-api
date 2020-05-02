@@ -30,32 +30,62 @@
     <form method="post">
         <fieldset>
         <legend>Student Information:</legend>
-
-        <label for="firstName">Full name:</label><br>
-        <div class="row">
-            <div class="col-sm-3"></div>
-            <div class="col-sm-3"><input type="text" id="firstName" name="firstName" placeholder="First name" width="100%"required></div>
-            <div class="col-sm-3"><input type="text" id="lastName" name="lastName"placeholder="Last name" required></div>
-            <div class="col-sm-3"></div>
+        
+        <!-- <div class="form-group row"> -->
+        <div class="row align-items-end" style="padding-bottom:10px;">
+            <div class="col-lg-3"></div>
+            <div class="col-lg-3">
+                <label for="firstName">Full name:</label>
+                <input class="form-control" type="text" id="firstName" name="firstName" placeholder="First name" width="100%" required>
+            </div>
+            <div class="col-lg-3">
+                <label for="lastName"><br></label>
+                <input class="form-control" type="text" id="lastName" name="lastName"placeholder="Last name" required>
+            </div>
+            <div class="col-lg-3"></div>
         </div>
 
-        <label for="email">UCI Email:</label><br>
-        <input type="text" id="email" name="email" placeholder="panteater@uci.edu" title="Must Use Your UCI Email, e.g. _______@uci.edu" pattern="[A-Za-z0-9]{1,}@uci.edu" size="66" required><br>
+        <!-- <div class="form-group row"> -->
+        <div class="row align-items-end" style="padding-bottom:10px;">
+            <div class="col-lg-3"></div>
+            <div class="col-lg-6">
+                <label for="email">UCI Email:</label>
+                <input class="form-control" type="text" id="email" name="email" placeholder="panteater@uci.edu" title="Must Use Your UCI Email, e.g. _______@uci.edu" pattern="[A-Za-z0-9]{1,}@uci.edu" required>
+            </div>
+            <div class="col-lg-3"></div>
+        </div> 
 
-        <label for="major">Current Major:</label><br>
-        <input type="text" id="major" name="major" placeholder="Undeclared" size="66" required><br>
+        <!-- <div class="form-group row"> -->
+        <div class="row align-items-end" style="padding-bottom:10px;">
+            <div class="col-lg-3"></div>
+            <div class="col-lg-6">
+                <label for="major">Current Major:</label><br>
+                <input class="form-control" type="text" id="major" name="major" placeholder="Undeclared" required>
+            </div>
+            <div class="col-lg-3"></div>
+        </div>
 
-        <label for="year">Year:</label><br>
-        <select id="year" name="year">
-            <option value="Freshman">Freshman</option>
-            <option value="Sophmore">Sophmore</option>
-            <option value="Junior">Junior</option>
-            <option value="Senior">Senior</option>
-            <option value="SuperSenior">5th Year +</option>
-            <option value="Graduate">Grad Student</option>
-        </select>
+        <!-- <div class="form-group row"> -->
+        <div class="row align-items-end" style="padding-bottom:10px;">
+            <div class="col-lg-3"></div>
+            <div class="col-lg-3">
+                <label for="year">Year:</label>
+                <select class="form-control" id="year" name="year">
+                <option value="Freshman">Freshman</option>
+                <option value="Sophmore">Sophmore</option>
+                <option value="Junior">Junior</option>
+                <option value="Senior">Senior</option>
+                <option value="SuperSenior">5th Year +</option>
+                <option value="Graduate">Grad Student</option>
+                </select>
+            </div>
+            <div class="text-right col-lg-3">
+                <label for="submit"><br><br></label>
+                <button id="submit" name="submit" type="submit" value="Submit">Submit</button>
+            </div>
+            <div class="col-lg-3"></div>
+        </div>
 
-        <button type="submit" value="Submit">Submit</button>
         </fieldset>
     </form>
 </div>
