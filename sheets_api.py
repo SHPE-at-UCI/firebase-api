@@ -4,7 +4,6 @@ import os.path
 from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
-#import datetime
 
 # If modifying these scopes, delete the file token.pickle.
 SCOPES = ['https://www.googleapis.com/auth/spreadsheets']
@@ -32,6 +31,7 @@ def _write(Spreadsheet, Sheet, Range, Data):
     values = service.spreadsheets().values()
     result = values.update(spreadsheetId=Spreadsheet, range=Sheet+"!"+Range, valueInputOption="RAW", body=body).execute()
     
+
 '''
 	Server-side sign-in, should only force server to sign-in once when token.pickle is invalid or non-existant, so far only my UCI account is allowed to do so. I believe that if you test this with the token.pickle and credentials.json supplied, you won't need to sign-in to my account anyway, link to accessing the spreadsheet is supplied and shared to all UCI members witht the link
 '''
