@@ -1,8 +1,9 @@
-from flask import Flask, render_template, request, redirect, make_response
+from flask import Flask, render_template, request, redirect, make_response, url_for
 from urllib.request import Request, urlopen
 from urllib.parse import urlencode
 import sqlite3
 import requests
+import sheets_api
 
 app = Flask(__name__)
 
@@ -10,7 +11,22 @@ app = Flask(__name__)
 @app.route("/", methods=('GET', 'POST'))
 def index():    
     if request.method == 'POST':
-        email = request.form["emailInput"]                
+        email = request.form["emailInput"]   
+         
+         
+        sheets_api.sign_in()
+        #Find and AddNew take 2 API calls each
+        #Option 1: Search for email, if exists say already signed in otherwise add the email
+        if sheets_api.find(email) != -1:
+        	print("This email already exists")
+        else:
+        	sheets_api.addNew(email)
+        #Option 2: Add email to sheet, spreadsheet has separate list of unique email
+        #####sheets_api.addNew(email)    
+        #Option 3: Read email list into python and check if unique
+        #####...        	
+        	 
+        	      
         return render_template('thank-you.html')
     return render_template('home.html')
 
@@ -31,7 +47,24 @@ def update():
 @app.route("/thank-you")
 def success_page():
     return render_template("thank-you.html")
-
+# This is for registerAlt.html, which is my slow progression on using Bootstrap to make the Register Page mobile friendly #
+@app.route("/registerV2", methods=('GET','POST'))
+def improved_register():
+    return render_template("registerAlt.html")
+###########################################################################################################################
+@app.route("/register", methods=('GET','POST'))
+def register_page():
+    print("Can You See This")
+    if request.method == 'POST':
+        firstName = request.form['firstName']
+        lastName = request.form['lastName']
+        email = request.form['email']
+        major = request.form['major']
+        year = request.form['year']
+        username = firstName + lastName
+        print(username)
+        return render_template("thank-you.html")
+    return render_template("register.html")
 
 @app.route("/delete")
 def delete():
@@ -77,7 +110,7 @@ def login():
         #resp = make_response(redirect("/"))
         #resp.set_cookie('SHPE', 'logged in')
     else:
-        return redirect(webauth)q
+        return redirect(webauth)
         #resp = make_response(redirect(webauth))
         #resp.set_cookie('SHPE', 'login')
     #return resp
