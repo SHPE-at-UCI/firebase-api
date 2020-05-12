@@ -31,7 +31,6 @@ def success_page():
 
 @app.route("/register", methods=('GET','POST'))
 def register_page():
-    print("Can You See This")
     if request.method == 'POST':
         firstName = request.form['firstName']
         lastName = request.form['lastName']
@@ -39,7 +38,6 @@ def register_page():
         major = request.form['major']
         year = request.form['year']
         username = firstName + lastName
-        print(username)
         return render_template("thank-you.html")
     return render_template("register.html")
 
