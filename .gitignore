@@ -16,3 +16,7 @@ build/
 
 # The . idea folder (hidden on OS X) in the solution root contains IntelliJ's project specific settings files.
 .idea/
+
+*.*~
+sheets/credentials.json
+sheets/token.pickle
