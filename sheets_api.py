@@ -9,7 +9,7 @@ from google.auth.transport.requests import Request
 SCOPES = ['https://www.googleapis.com/auth/spreadsheets']
 
 # Which Spreadsheet to access
-sheet_name = "test"
+sheet_name = "Sheet1"
 SHEET_ID = '1wGp2kCMkAYo31s4dTlfi8lrMfWsedWT-HV_ZpwsdsCg'
 
 # Runtime API sign-in information
