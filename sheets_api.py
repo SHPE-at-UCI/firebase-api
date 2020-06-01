@@ -1,9 +1,13 @@
 from __future__ import print_function
 import pickle
-import os.path
+import os#.path
 from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
+
+
+flush_limit = int(os.getenv("FLUSH_LIMIT"))
+
 
 # If modifying these scopes, delete the file token.pickle.
 SCOPES = ['https://www.googleapis.com/auth/spreadsheets']
@@ -81,6 +85,7 @@ def addSingle(Data):
 def addMultiple(Data):
     add_pos = _read(SHEET_ID, sheet_name, "B1")[0][0]
     _write(SHEET_ID, sheet_name, add_pos, Data)
+    
 '''
 	Find whether data exists and where it exists
 	
@@ -95,11 +100,12 @@ def find(Data):
 	return it in a good format for addMultiple
 '''
 class buffer:
-    def __init__(self):
-        self.data = set()#TODO we can change this value to be bigger, smaller values are just faster to test
-        self.flush_limit = 3
+    def __init__(self, data=set()):
+        self.data = set(data)
+    def __repr__(self):
+        return "sheets_api.buffer("+repr(self.data)+")"
     def __str__(self):
-        return "flush limit "+str(self.flush_limit)+", "+str(self.data)
+        return "flush limit "+str(flush_limit)+", "+str(self.data)
     def __len__(self):
         return len(self.data)
     def add(self, item):
@@ -109,7 +115,7 @@ class buffer:
        	    item = (item,)
         self.data.add(item)
     def is_filled(self):
-        return len(self)>=self.flush_limit
+        return len(self)>=flush_limit
     def process(self):
         data = self.data
         self.__init__()
