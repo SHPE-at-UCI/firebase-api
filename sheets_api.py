@@ -97,7 +97,7 @@ def find(Data):
 class buffer:
     def __init__(self):
         self.data = set()#TODO we can change this value to be bigger, smaller values are just faster to test
-        self.flush_limit = 3
+        self.flush_limit = 1
     def __str__(self):
         return "flush limit "+str(self.flush_limit)+", "+str(self.data)
     def __len__(self):
