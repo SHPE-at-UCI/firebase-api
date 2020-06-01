@@ -13,30 +13,50 @@ export FLUSH_LIMIT=30
 export FLUSH_HOURS=1
 export FLUSH_MINUTES=1
 
-
+#copy of parameters
+LIMIT=$FLUSH_LIMIT
+HOURS=$FLUSH_HOURS
+MINUTES=$FLUSH_MINUTES
 #args=$(getopt -o "l:h:m:" -l "limit:,hours:,minutes:" -- "$@")
 while getopts '?pl:h:m:' OPTION; do
   var=$(printf "%d\n" $OPTARG 2>/dev/null)
   case "$OPTION" in
     l)
         if [ $var -gt 0 ]; then
-            export FLUSH_LIMIT=$OPTARG
+            LIMIT=$OPTARG
         fi;;
     h)
-        if [ $var -gt 0 ]||[ $var -eq 0 ]&&[ $FLUSH_MINUTES != 0 ]; then
-            export FLUSH_HOURS=$OPTARG
+        if [ $var -gt 0 ]||[ $var -eq 0 ]&&[ $MINUTES != 0 ]; then
+            HOURS=$OPTARG
         fi;;
     m)
-        if [ $var -gt 0 ]||[ $var -eq 0 ]&&[ $FLUSH_HOURS != 0 ]; then
-            export FLUSH_MINUTES=$OPTARG
+        if [ $var -gt 0 ]||[ $var -eq 0 ]&&[ $HOURS != 0 ]; then
+            MINUTES=$OPTARG
         fi;;
     p)
         print=true;;
     ?)
-        echo "usage: $0 [-?] [-p] [-l flush_size] [-h hrs_until_reflush] [-m min_until_reflush]"
+        echo "Usage: $0 [-?] [-p] [-l size] [-h hours] [-m minutes]"
+        echo "Run flask app $FLASK_APP in $FLASK_ENV environment."
+        echo ""
+        echo "Current defaults are:"
+        echo "  FLUSH_LIMIT   = $FLUSH_LIMIT"
+        echo "  FLUSH_HOURS   = $FLUSH_HOURS"
+        echo "  FLUSH_MINUTES = $FLUSH_MINUTES"
+        echo ""
+        echo "Options:"
+        echo "  -? \t\t display this help and exit"
+        echo "  -p \t\t print out values of parameters before running"
+        echo "  -l size \t change how much data is needed before buffer flushing (>=1)"
+        echo "  -h hours \t flush the buffer every so hours (>=0)"
+        echo "  -m minutes \t flush the buffer every so minutes (>=0)"
         exit 0;;
   esac
 done
+#write back out parameters
+$FLUSH_LIMIT=$LIMIT
+$FLUSH_HOURS=$HOURS
+$FLUSH_MINUTES=$MINUTES
 
 if $print; then
     echo " Flush size limit: $FLUSH_LIMIT"
