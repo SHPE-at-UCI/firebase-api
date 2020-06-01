@@ -9,7 +9,7 @@ from google.auth.transport.requests import Request
 SCOPES = ['https://www.googleapis.com/auth/spreadsheets']
 
 # Which Spreadsheet to access
-sheet_name = "test"
+sheet_name = "Sheet1"
 SHEET_ID = '1wGp2kCMkAYo31s4dTlfi8lrMfWsedWT-HV_ZpwsdsCg'
 
 # Runtime API sign-in information
@@ -54,13 +54,13 @@ def sign_in():
     if not creds or not creds.valid:
         print("Credentials don't exist or have expired")
         #creds.expired updates datetime.timedelta(hours=7, minutes=5) from expiration
-        if creds and creds.expired and creds.refresh_token:
-            print("Using refresh token to gain access token")
-            creds.refresh(Request())
-        else:
-            print("Performing first time token generation")
-            flow = InstalledAppFlow.from_client_secrets_file('sheets/credentials.json', SCOPES)
-            creds = flow.run_local_server(host='localhost', port=8080, prompt='consent')
+        # if creds and creds.expired and creds.refresh_token:
+        #     print("Using refresh token to gain access token")
+        #     creds.refresh(Request())
+        # else:
+        print("Performing first time token generation")
+        flow = InstalledAppFlow.from_client_secrets_file('sheets/credentials.json', SCOPES)
+        creds = flow.run_local_server(host='localhost', port=8080, prompt='consent')
             
         with open('sheets/token.pickle', 'wb') as token:
             pickle.dump(creds, token)
