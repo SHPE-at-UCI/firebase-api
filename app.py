@@ -1,31 +1,105 @@
-from flask import Flask, render_template, request, redirect, make_response, url_for
-from urllib.request import Request, urlopen
+from flask import Flask, render_template, request, redirect, url_for
+from apscheduler.schedulers.background import BackgroundScheduler
 from urllib.parse import urlencode
+import atexit
 import sqlite3
 import requests
 import sheets_api
 
+
 app = Flask(__name__)
+scheduler = None
+data_buffer = sheets_api.buffer()
+running_flush = False
+waiting_flush = False
+
+#empty a non-empty buffer to sheet
+def flush_buffer():
+    global data_buffer, running_flush, waiting_flush
+    completed = True
+    if(len(data_buffer)!=0):
+        print("Flushing buffer")
+        data = data_buffer.process()
+        try:
+            running_flush = True
+            sendData(data)
+        except Exception as e:
+            print("Error occured in flush:\n\t", e)
+            for item in data:
+                data_buffer.add(item)
+            completed = False
+        finally:
+            running_flush = False
+    #check if there is a waiting_flush, if so complete it
+    while(waiting_flush and len(data_buffer)!=0):
+        print("Flushing buffer")
+        data = data_buffer.process()
+        try:
+            running_flush = True
+            sendData(data)
+        except Exception as e:
+            print("Error occured in coalesced flush:\n\t", e)
+            for item in data:
+                data_buffer.add(item)
+            completed = False
+        finally:
+            waiting_flush = False
+            running_flush = False
+    return completed
+    
+#make sure we have access to sheets and then write it to sheet
+def sendData(data):
+    sheets_api.sign_in()
+    sheets_api.addMultiple(data)
+    
+#make sure that all cancelled, the buffer has been successfully
+def shutdown():
+    print("\nShutting down server...")
+    for job in scheduler.get_jobs():
+        job.remove()
+    if(not flush_buffer()):
+        print("Flush failed!\n\tcurrent state of data_buffer:", data_buffer)
+    print("Killing scheduler")
+    scheduler.shutdown()
+    print("Shutdown.")
+        
+@app.before_first_request
+def init_scheduler():
+    print("Server starting up...")
+    sheets_api.sign_in()
+
+    global scheduler
+    scheduler = BackgroundScheduler()
+    scheduler.start()
+    
+    #add a job to infrequently flush the buffer if there is data but not
+    #enough to fill the buffer
+    scheduler.add_job(name='Timed flush', id="job_1", func=flush_buffer, trigger='interval', hours=1)
+    
+    # Schedule shutdown to occur when exiting the app
+    atexit.register(lambda: shutdown())
+    print("Server started")
 
 
 @app.route("/", methods=('GET', 'POST'))
-def index():    
+def index():
     if request.method == 'POST':
         email = request.form["emailInput"]   
          
-         
-        sheets_api.sign_in()
-        #Find and AddNew take 2 API calls each
-        #Option 1: Search for email, if exists say already signed in otherwise add the email
-        if sheets_api.find(email) != -1:
-        	print("This email already exists")
-        else:
-        	sheets_api.addNew(email)
-        #Option 2: Add email to sheet, spreadsheet has separate list of unique email
-        #####sheets_api.addNew(email)    
-        #Option 3: Read email list into python and check if unique
-        #####...        	
-        	 
+        global data_buffer
+        data_buffer.add(email)
+        print("Data Buffer:", data_buffer)
+        
+        
+        #if our buffer has enough data in it, we'll just flush it to sheets
+        if(data_buffer.is_filled()):
+            #we flush it as background job to make sure it doesnt slow anyones responses
+            global scheduler, running_flush, waiting_flush
+            #if theres currently a flush already occuring, note impending flush, otherwise schedule
+            if(running_flush):
+                waiting_flush = True
+            else:
+                scheduler.add_job(name='Filled flush', id="job_2", func=flush_buffer, trigger='date')        	 
         	      
         return render_template('thank-you.html')
     return render_template('home.html')
@@ -47,14 +121,9 @@ def update():
 @app.route("/thank-you")
 def success_page():
     return render_template("thank-you.html")
-# This is for registerAlt.html, which is my slow progression on using Bootstrap to make the Register Page mobile friendly #
-@app.route("/registerV2", methods=('GET','POST'))
-def improved_register():
-    return render_template("registerAlt.html")
-###########################################################################################################################
+
 @app.route("/register", methods=('GET','POST'))
 def register_page():
-    print("Can You See This")
     if request.method == 'POST':
         firstName = request.form['firstName']
         lastName = request.form['lastName']
@@ -62,7 +131,6 @@ def register_page():
         major = request.form['major']
         year = request.form['year']
         username = firstName + lastName
-        print(username)
         return render_template("thank-you.html")
     return render_template("register.html")
 
@@ -133,6 +201,7 @@ def logout():
     #return resp
     
     
+
 
 if __name__ == "__main__":
     app.run()
