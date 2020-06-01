@@ -35,6 +35,11 @@ Install Flask:
 $ pip3 install -r requirements.txt
 ```
 
+Run app with help flag to list changable parameters and exit
+```
+./runapp.sh -?
+```
+
 Run Flask
 ```
 ./runapp.sh
