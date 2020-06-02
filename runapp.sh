@@ -7,7 +7,7 @@ export FLASK_ENV=development
 print=false
 
 #size of buffer before trying to flush
-export FLUSH_LIMIT=30
+export FLUSH_LIMIT=1
 
 #time before flushing a non-empty buffer
 export FLUSH_HOURS=1
@@ -17,7 +17,7 @@ export FLUSH_MINUTES=1
 LIMIT=$FLUSH_LIMIT
 HOURS=$FLUSH_HOURS
 MINUTES=$FLUSH_MINUTES
-#args=$(getopt -o "l:h:m:" -l "limit:,hours:,minutes:" -- "$@")
+
 while getopts '?pl:h:m:' OPTION; do
   var=$(printf "%d\n" $OPTARG 2>/dev/null)
   case "$OPTION" in
@@ -53,10 +53,11 @@ while getopts '?pl:h:m:' OPTION; do
         exit 0;;
   esac
 done
+
 #write back out parameters
-$FLUSH_LIMIT=$LIMIT
-$FLUSH_HOURS=$HOURS
-$FLUSH_MINUTES=$MINUTES
+FLUSH_LIMIT=$LIMIT
+FLUSH_HOURS=$HOURS
+FLUSH_MINUTES=$MINUTES
 
 if $print; then
     echo " Flush size limit: $FLUSH_LIMIT"
