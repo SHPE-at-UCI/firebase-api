@@ -13,6 +13,8 @@ data_buffer = sheets_api.buffer()
 running_flush = False
 waiting_flush = False
 
+
+
 #empty a non-empty buffer to sheet
 def flush_buffer():
     global data_buffer, running_flush, waiting_flush    
@@ -25,9 +27,9 @@ def flush_buffer():
             sendData(data)
         except Exception as e:
             print("Error occured in flush:\n\t", e)
-            #for item in data:
-            #    data_buffer.add(item)
-            data_buffer = sheets_api.buffer(data)
+            for item in data:
+                data_buffer.add(item)
+            #data_buffer = sheets_api.buffer(data)
             completed = False
         finally:
             running_flush = False
@@ -40,9 +42,9 @@ def flush_buffer():
             sendData(data)
         except Exception as e:
             print("Error occured in coalesced flush:\n\t", e)
-            #for item in data:
-            #    data_buffer.add(item)
-            data_buffer = sheets_api.buffer(data)
+            for item in data:
+                data_buffer.add(item)
+            #data_buffer = sheets_api.buffer(data)
             completed = False
         finally:
             waiting_flush = False
@@ -53,6 +55,9 @@ def flush_buffer():
 def sendData(data):
     sheets_api.sign_in()
     sheets_api.addMultiple(data)
+    
+    
+       
     
 #make sure that all cancelled, the buffer has been successfully saved
 def shutdown():
@@ -67,7 +72,6 @@ def shutdown():
     #if(not flush_buffer()):
     #    print("Flush failed!\n\tcurrent state of data_buffer:", data_buffer)
     
-        
     print("Killing scheduler")
     scheduler.shutdown()
     print("Shutdown.")
@@ -98,36 +102,37 @@ def init_scheduler():
     atexit.register(lambda: shutdown())
     
     print("Server started")
+    
+    
+       
+    
+def signin_user(user):
+    global data_buffer
+    data_buffer.add(user)
+    print("Data Buffer:", data_buffer)
+    
+    #if our buffer has enough data in it, we'll just flush it to sheets
+    if(data_buffer.is_filled()):
+        #we flush it as background job to make sure it doesnt slow anyones responses
+        global scheduler, running_flush, waiting_flush
+        #if theres currently a flush already occuring, note impending flush, otherwise schedule
+        if(running_flush):
+            waiting_flush = True
+        else:
+            scheduler.add_job(name='Filled flush', id="job_2", func=flush_buffer, trigger='date')        	 
+    	      
+    return redirect("/thank-you")#render_template('thank-you.html')
 
 
 @app.route("/", methods=('GET', 'POST'))
 def index():
     if request.method == 'POST':
-        email = request.form["emailInput"]   
-         
-        global data_buffer
-        data_buffer.add(email)
-        print("Data Buffer:", data_buffer)
-        
-        
-        #if our buffer has enough data in it, we'll just flush it to sheets
-        if(data_buffer.is_filled()):
-            #we flush it as background job to make sure it doesnt slow anyones responses
-            global scheduler, running_flush, waiting_flush
-            #if theres currently a flush already occuring, note impending flush, otherwise schedule
-            if(running_flush):
-                waiting_flush = True
-            else:
-                scheduler.add_job(name='Filled flush', id="job_2", func=flush_buffer, trigger='date')        	 
-        	      
-        return render_template('thank-you.html')
-    return render_template('home.html')
-
+        return signin_user(request.form["emailInput"])
+    return render_template('home.html')  
 
 @app.route("/create")
 def create():
     return "Create"
-
 
 @app.route("/read")
 def read():
@@ -150,18 +155,22 @@ def register_page():
         major = request.form['major']
         year = request.form['year']
         username = firstName + lastName
-        return render_template("thank-you.html")
+        return redirect("/thank-you")#render_template("thank-you.html")
     return render_template("register.html")
 
 @app.route("/delete")
 def delete():
     return "Delete"
     
+    
+       
+    
 def refresh_login_status():
-    login_status = {}
+    login_status = None
     uci_cookie = "ucinetid_auth"
     
     if(uci_cookie in request.cookies):
+        login_status = {}
         param = urlencode({uci_cookie: request.cookies.get(uci_cookie)})
         webauth_check = 'http://login.uci.edu/ucinetid/webauth_check'
         resp = requests.get(webauth_check+"?"+param).content.decode("utf-8")
@@ -186,40 +195,33 @@ def refresh_login_status():
              
 
 @app.route("/login")
-def login():
+def uci_signin():
     resp = None
-    param = urlencode({"return_url": "http://shpe.uci.edu:5000"})
+    param = urlencode({"return_url": "http://shpe.uci.edu:5000/login"})
     webauth = 'http://login.uci.edu/ucinetid/webauth?' + param
     
     login_status = refresh_login_status()
-    if(login_status['valid']):
-        return "Already logged in as "+login_status['ucinetid']#redirect("/")
-        #resp = make_response(redirect("/"))
-        #resp.set_cookie('SHPE', 'logged in')
+    if(not login_status):
+        return "UCI login failed"
+    elif(login_status['valid']):
+        print(login_status)
+        return signin_user(login_status['ucinetid'])
     else:
-        return redirect(webauth)q
-        #resp = make_response(redirect(webauth))
-        #resp.set_cookie('SHPE', 'login')
-    #return resp
+        return redirect(webauth)
     
+
+
 @app.route("/logout")
 def logout():
     resp = None
-    param = urlencode({"return_url": "http://shpe.uci.edu:5000"})
+    param = urlencode({"return_url": "http://shpe.uci.edu:5000/logout"})
     webauth = 'http://login.uci.edu/ucinetid/webauth_logout?' + param
     
     login_status = refresh_login_status()
     if(login_status['valid']):
         return redirect(webauth)
-        #resp = make_response(redirect(webauth))
-        #resp.set_cookie('SHPE', 'logout')
     else:
-        return "Not logged in"#redirect("/")
-        #resp = make_response(redirect("/"))
-        #resp.set_cookie('SHPE', 'logged out')
-    #return resp
-    
-    
+        return redirect("/")
 
 
 if __name__ == "__main__":
