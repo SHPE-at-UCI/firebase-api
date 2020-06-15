@@ -20,4 +20,6 @@ build/
 *.*~
 sheets/credentials.json
 sheets/token.pickle
+
 .buffer
+.DS_Store
