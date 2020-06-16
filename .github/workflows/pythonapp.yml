@@ -40,4 +40,4 @@ jobs:
 #         pytest
 
     - name: Run Shellcheck
-        uses: azohra/shell-linter@v0.4.0
+    - uses: azohra/shell-linter@v0.4.0
