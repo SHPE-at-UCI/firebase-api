@@ -13,7 +13,7 @@ flush_limit = int(os.getenv("FLUSH_LIMIT"))
 SCOPES = ['https://www.googleapis.com/auth/spreadsheets']
 
 # Which Spreadsheet to access
-sheet_name = "Sheet1"
+sheet_name = "test"
 SHEET_ID = '1wGp2kCMkAYo31s4dTlfi8lrMfWsedWT-HV_ZpwsdsCg'
 
 # Runtime API sign-in information
