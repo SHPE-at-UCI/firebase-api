@@ -57,11 +57,12 @@ You’ll see output similar to this:
 * Debugger PIN: 855-212-761
 ```
 
-In order to be able to use webauth features, server needs to be hosted on a '.uci.edu' domain. The runapp.sh script can modify the hostname of the flask server to include '.uci.edu' with the '-r' parameter. However to run server locally and work correctly you will need to modify the local hosts file which should be found at: 
-    Linux: "/etc/hosts"
+In order to be able to use webauth features, server needs to be hosted on a '.uci.edu' domain. However to run server locally and work correctly you will need to modify the local hosts file which should be found at: 
+
+    Linux and Mac: "/etc/hosts"
     Windows: "C:\Windows\System32\Drivers\etc\hosts"
-    Mac: Assumed to be same as Linux
-In the hosts file you should see "127.0.0.1   localhost" if you change this to "127.0.0.1    shpe.uci.edu#localhost", sign-in should work with no issues. 
+    
+In the hosts file you should see "127.0.0.1   localhost" if you add "127.0.0.1    shpe.uci.edu" on the line right below it, sign-in should work with no issues. 
 Note: 'shpe.uci.edu' can be replaced with something else but to use UCI cookies '.uci.edu' is needed.
 
 
