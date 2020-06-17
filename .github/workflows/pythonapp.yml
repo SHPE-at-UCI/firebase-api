@@ -39,5 +39,10 @@ jobs:
 #       run: |
 #         pytest
 
-    - name: Run Shellcheck
-    - uses: azohra/shell-linter@v0.4.0
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+      - uses: actions/checkout@v1
+      - name: Run Shellcheck
+        uses: azohra/shell-linter@v0.4.0
