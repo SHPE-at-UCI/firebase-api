@@ -6,7 +6,10 @@ print=false
 #flask variables
 export FLASK_APP=app.py
 export FLASK_ENV=development
-export FLASK_RUN_HOST=shpe.uci.edu
+export FLASK_RUN_HOST=localhost
+
+# Uncomment the line below if you've followed the instructions in README.md
+# export FLASK_RUN_HOST=shpe.uci.edu
 
 #size of buffer before trying to flush
 export FLUSH_LIMIT=1
