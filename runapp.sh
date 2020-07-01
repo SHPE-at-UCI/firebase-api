@@ -28,7 +28,7 @@ HOURS=$FLUSH_HOURS
 MINUTES=$FLUSH_MINUTES
 
 while getopts '?pa:e:l:h:m:' OPTION; do #'?pa:e:r:l:h:m:' OPTION; do
-  var=$(printf "%d\n" $OPTARG 2>/dev/null)
+  var=$(printf "%d\n" "$OPTARG" 2>/dev/null)
   case "$OPTION" in
     a)
         if [ -f "$OPTARG" ]; then
@@ -43,15 +43,15 @@ while getopts '?pa:e:l:h:m:' OPTION; do #'?pa:e:r:l:h:m:' OPTION; do
     #         HOST=$OPTARG
     #     fi;;
     l)
-        if [ $var -gt 0 ]; then
+        if [ "$var" -gt 0 ]; then
             LIMIT=$OPTARG
         fi;;
     h)
-        if [ $var -gt 0 ]||[ $var -eq 0 ]&&[ $MINUTES != 0 ]; then
+        if [ "$var" -gt 0 ]||[ "$var" -eq 0 ]&&[ $MINUTES != 0 ]; then
             HOURS=$OPTARG
         fi;;
     m)
-        if [ $var -gt 0 ]||[ $var -eq 0 ]&&[ $HOURS != 0 ]; then
+        if [ "$var" -gt 0 ]||[ "$var" -eq 0 ]&&[ "$HOURS" != 0 ]; then
             MINUTES=$OPTARG
         fi;;
     p)
@@ -67,14 +67,15 @@ while getopts '?pa:e:l:h:m:' OPTION; do #'?pa:e:r:l:h:m:' OPTION; do
         echo "  FLUSH_MINUTES = $FLUSH_MINUTES"
         echo ""
         echo "Options:"
-        echo "  -? \t\t display this help and exit"
-        echo "  -p \t\t print out values of parameters before running"
-        echo "  -a app-name \t run using a different flask app"
-        echo "  -e environ \t run using different flask environment (development or production)"
-        #echo "  -r host-name \t run using different flask hostname"
-        echo "  -l size \t change how much data is needed before buffer flushing (>=1)"
-        echo "  -h hours \t flush the buffer every so hours (>=0)"
-        echo "  -m minutes \t flush the buffer every so minutes (>=0)"
+        printf "\n  -? \t\t display this help and exit"
+        printf "\n  -p \t\t print out values of parameters before running"
+        printf "\n  -a app-name \t run using a different flask app"
+        printf "\n  -e environ \t run using different flask environment (development or production)"
+        #printf "\n  -r host-name \t run using different flask hostname"
+        printf "\n  -l size \t change how much data is needed before buffer flushing (>=1)"
+        printf "\n  -h hours \t flush the buffer every so hours (>=0)"
+        printf "\n  -m minutes \t flush the buffer every so minutes (>=0)"
+        printf "\n"
         exit 0;;
   esac
 done
