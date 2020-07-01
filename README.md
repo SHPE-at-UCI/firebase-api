@@ -2,7 +2,8 @@
 
 Run this powerful authentication website on your computer!  
 
-If you have any questions, comments, or concerns regarding this `README.md`, email git admins [tech.shpe.uci@gmail.com](mailto:tech.shpe.uci@gmail.com?subject=[GitHub SHPE-UCI Help]))
+If you have any questions, comments, or concerns regarding this `README.md`, email git admins
+ [tech.shpe.uci@gmail.com](mailto:tech.shpe.uci@gmail.com?Subject=Github%20README%20Help&Body=Greetings%20Tech%20PM,)
 
 ## Installation
 
