@@ -56,6 +56,11 @@ $ ./runapp.sh
 
 ## Contributing
 
+Setup automatic git commit templating, so your they follow the [Git Commit Guidelines](https://github.com/angular/angular.js/blob/master/DEVELOPERS.md#-git-commit-guidelines)
+```
+(venv) User:shpesignin username$ git config --get commit.template
+(venv) User:shpesignin username$ git config commit.template ./.git-commit-template.txt 
+```
 We use a feature branch workflow.
 
 Step 1: Create a new branch
