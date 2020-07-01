@@ -164,12 +164,13 @@ def success_page():
 @app.route("/register", methods=("GET", "POST"))
 def register_page():
     if request.method == "POST":
-        firstName = request.form["firstName"]
-        lastName = request.form["lastName"]
-        email = request.form["email"]
-        major = request.form["major"]
-        year = request.form["year"]
-        username = firstName + lastName
+        # TODO: Understand why we were extracting these variables
+        # firstName = request.form["firstName"]
+        # lastName = request.form["lastName"]
+        # email = request.form["email"]
+        # major = request.form["major"]
+        # year = request.form["year"]
+        # username = firstName + lastName
         return redirect("/thank-you")  # render_template("thank-you.html")
     return render_template("register.html")
 
