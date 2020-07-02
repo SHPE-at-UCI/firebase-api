@@ -56,6 +56,16 @@ $ ./runapp.sh
 
 ## Contributing
 
+Most software engineers contribute new code via their commandline using [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/), 
+
+After you successfully completed steps 1-3 from the `Installation`, follow the command below before continuing to `Contributing: Step 1`:
+
+```
+(venv) User:shpesignin yourUserName$ git config --get commit.template
+(venv) User:shpesignin yourUserName$ git config commit.template ./.git-commit-template.txt
+```
+Now, every time you contribute via a `git commit` and templating VIM editor will appear ✨🍰
+
 We use a feature branch workflow.
 
 Step 1: Create a new branch
