@@ -1,9 +1,15 @@
+# Standard Lib Imports
+import atexit
+from urllib.parse import urlencode
+
+# 3rd Party Imports
 from flask import Flask, render_template, request, redirect
 from apscheduler.schedulers.background import BackgroundScheduler
-from urllib.parse import urlencode
-import atexit
-import sheets_api
 import requests
+
+# Local App Imports
+import sheets_api
+
 
 # import sqlite3
 # from urllib.request import Request, urlopen
