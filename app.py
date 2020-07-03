@@ -125,7 +125,8 @@ def signin_user(user):
 
     # if our buffer has enough data in it, we'll just flush it to sheets
     if data_buffer.is_filled():
-        # we flush it as background job to make sure it doesnt slow anyones responses
+        # we flush it as background job
+        # to make sure it doesnt slow anyones responses
         global scheduler, running_flush, waiting_flush
         # if theres currently a flush already occuring, note impending flush,
         # otherwise schedule
@@ -133,7 +134,8 @@ def signin_user(user):
             waiting_flush = True
         else:
             scheduler.add_job(
-                name="Filled flush", id="job_2", func=flush_buffer, trigger="date"
+                name="Filled flush", id="job_2", func=flush_buffer,
+                trigger="date"
             )
 
     return redirect("/thank-you")  # render_template('thank-you.html')
@@ -219,13 +221,14 @@ def refresh_login_status():
 
 @app.route("/login")
 def login():
-    resp = None
+    # resp = None
     param = urlencode({"return_url": "http://shpe.uci.edu:5000"})
     webauth = "http://login.uci.edu/ucinetid/webauth?" + param
 
     login_status = refresh_login_status()
     if login_status["valid"]:
-        return "Already logged in as " + login_status["ucinetid"]  # redirect("/")
+        return "Already logged in as " + login_status["ucinetid"]
+        # TODO: redirect("/") ?
         # resp = make_response(redirect("/"))
         # resp.set_cookie('SHPE', 'logged in')
     else:
@@ -237,7 +240,7 @@ def login():
 
 @app.route("/logout")
 def logout():
-    resp = None
+    # resp = None
     param = urlencode({"return_url": "http://shpe.uci.edu:5000"})
     webauth = "http://login.uci.edu/ucinetid/webauth_logout?" + param
 
@@ -288,7 +291,7 @@ def refresh_login_status():
 
 @app.route("/login")
 def uci_signin():
-    resp = None
+    # resp = None
     param = urlencode({"return_url": "http://shpe.uci.edu:5000/login"})
     webauth = "http://login.uci.edu/ucinetid/webauth?" + param
 
@@ -304,7 +307,7 @@ def uci_signin():
 
 @app.route("/logout")
 def logout():
-    resp = None
+    # resp = None
     param = urlencode({"return_url": "http://shpe.uci.edu:5000/logout"})
     webauth = "http://login.uci.edu/ucinetid/webauth_logout?" + param
 
