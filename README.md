@@ -1,9 +1,14 @@
 # SHPE at UCI Member Sign In
 
 Run this powerful authentication website on your computer!  
+> *Python Installation step below the Demo UI Image!*
 
 If you have any questions, comments, or concerns regarding this `README.md`, email git admins
  [tech.shpe.uci@gmail.com](mailto:tech.shpe.uci@gmail.com?Subject=Github%20README%20Help&Body=Greetings%20Tech%20PM,)
+
+
+
+<img src="https://github.com/SHPE-at-UCI/shpesignin/blob/master/images/demo.png" width="600" height="600" />
 
 ## Installation
 
