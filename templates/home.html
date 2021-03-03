@@ -2,75 +2,254 @@
 
 
 {% block header %}
+<!DOCTYPE html>
+<!-- Created By CodingNepal -->
+<html lang="en" dir="ltr">
 
-<h3>     
-    <div class="p-3 mb-2 bg-warning text-dark">
-        <img data-src="https://www.shpe.org/uploads/images/logos/SHPE_logo_FullColor-RGB-2x.png" class="img-thumbnail" alt="logo" src="https://www.shpe.org/uploads/images/logos/SHPE_logo_FullColor-RGB-2x.png"
-        width="100" height="100">
-        <div class="mx-auto" style="width: 200px;">SHPE SignIn</div>
-  </div>
-</h3>
-  
-{% endblock %}
+<head>
+    <meta charset="utf-8">
+    <!-- Somehow I got an error, so I comment the title, just uncomment to show -->
+    <!-- <title>Animated Drop-down Menu CSS3</title> -->
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 
-
-<!-- This should always go here -->
-{% block title %} Home {% endblock %}
-
-<!-- You can change Register to anything else.-->
-
-{% block content %}
-<br>
-<br>
-<!-- All your body content goes here! -->
-<!-- <h3>Content goes here</h3> -->
-
-<body style="background-color:#E6E6FA">  
-    <div class="container">        
-        <div class="row justify-content-md-center p-3">                                                 
-            <div class="col-md-auto">
-                <div class="dropdown float-right" style="margin-right:100px">           
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Meeting
-                    </button>        
-                    
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item disabled" href="#">General Meeting</a>
-                    <a class="dropdown-item" href="#">Tech Committee</a>
-                    <a class="dropdown-item disabled" href="#">SHPEtinas</a>
-                    </div>    
-                </div>
-            </div>  
+    <h3>
+        <div class="p-3 mb-2 bg-warning text-dark">
+            <img data-src="https://www.shpe.org/uploads/images/logos/SHPE_logo_FullColor-RGB-2x.png"
+                class="img-thumbnail" alt="logo"
+                src="https://www.shpe.org/uploads/images/logos/SHPE_logo_FullColor-RGB-2x.png" width="100" height="100">
+            <div class="mx-auto" style="width: 200px;">SHPE SignIn</div>
         </div>
-        
+    </h3>
+
+    {% endblock %}
+
+
+    <!-- This should always go here -->
+    {% block title %} Home {% endblock %}
+
+    <!-- You can change Register to anything else.-->
+
+    {% block content %}
+    <br>
+    <br>
+    <!-- All your body content goes here! -->
+    <!-- <h3>Content goes here</h3> -->
+
+<body style="background-color:#E6E6FA">
+    <div class="container">
+        <div class="row justify-content-md-center p-3">
+            <div class="col-md-auto">
+                <div class="dropdown float-right" style="margin-right:100px">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Meeting
+                    </button>
+                    <nav>
+                        <label for="btn" class="button">Drop down
+                            <span class="fas fa-caret-down"></span>
+                        </label>
+                        <input type="checkbox" id="btn">
+                        <ul class="menu">
+                            <li><a href="#">Home</a></li>
+                            <li>
+                                <label for="btn-2" class="first">Features
+                                    <span class="fas fa-caret-down"></span>
+                                </label>
+                                <input type="checkbox" id="btn-2">
+                                <ul>
+                                    <li><a href="#">Pages</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <label for="btn-3" class="second">Services
+                                    <span class="fas fa-caret-down"></span>
+                                </label>
+                                <input type="checkbox" id="btn-3">
+                                <ul>
+                                    <li><a href="#">Web Design</a></li>
+                                    <li><a href="#">App Design</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#">Contact</a></li>
+                            <li><a href="#">Feedback</a></li>
+                        </ul>
+                    </nav>
+
+                    <!-- This code used to rotate drop icon(-180deg).. -->
+                    <script>
+                        $('nav .button').click(function () {
+                            $('nav .button span').toggleClass("rotate");
+                        });
+                        $('nav ul li .first').click(function () {
+                            $('nav ul li .first span').toggleClass("rotate");
+                        });
+                        $('nav ul li .second').click(function () {
+                            $('nav ul li .second span').toggleClass("rotate");
+                        });
+                    </script>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item disabled" href="#">General Meeting</a>
+                        <a class="dropdown-item" href="#">Tech Committee</a>
+                        <a class="dropdown-item disabled" href="#">SHPEtinas</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <form action="login">
-            <button type="submit" class="btn btn-primary">UCI Login</button>                       
+            <button type="submit" class="btn btn-primary">UCI Login</button>
         </form>
         <form action="logout">
             <button type="submit" class="btn btn-primary">UCI Logout</button>
         </form>
-        
+
         <div class="row justify-content-md-center p-3">
-            <div class="col-md-auto">     
-                <form method = "POST">                                
-                    <div class="form-group">                        
-                        <label for="exampleInputEmail1">Email address</label>                        
-                        <input type="email" class="form-control" id="emailInput" name="emailInput" pattern="[a-zA-Z0-9]+@uci[.]edu"
-                        aria-describedby="emailHelp"  placeholder="example@uci.edu" required>
+            <div class="col-md-auto">
+                <form method="POST">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Email address</label>
+                        <input type="email" class="form-control" id="emailInput" name="emailInput"
+                            pattern="[a-zA-Z0-9]+@uci[.]edu" aria-describedby="emailHelp" placeholder="example@uci.edu"
+                            required>
                         <div class="invalid-feedback">
                             Please enter your UCI email.
                         </div>
 
-                        <small id="emailHelp" class="form-text text-muted">Use your UCI email to sign in.</small>                
-                                        
+                        <small id="emailHelp" class="form-text text-muted">Use your UCI email to sign in.</small>
+
                         <div class="row p-3">
-                            <button type="submit" class="btn btn-primary">I'm here!</button>                        
+                            <button type="submit" class="btn btn-primary">I'm here!</button>
                         </div>
-                    </div>                
+                    </div>
                 </form>
             </div>
-        </div> 
-    </div>   
+        </div>
+    </div>
 </body>
+<style>
+    @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
 
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        user-select: none;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    nav {
+        position: absolute;
+        top: 20%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: #1b1b1b;
+        width: 400px;
+        line-height: 40px;
+        padding: 8px 25px;
+        border-radius: 5px;
+    }
+
+    nav label {
+        color: white;
+        font-size: 22px;
+        font-weight: 500;
+        display: block;
+        cursor: pointer;
+    }
+
+    .button span {
+        float: right;
+        line-height: 40px;
+        transition: 0.5s;
+    }
+
+    .button span.rotate {
+        transform: rotate(-180deg);
+    }
+
+    nav ul {
+        position: absolute;
+        background: #1b1b1b;
+        list-style: none;
+        top: 75px;
+        left: 0;
+        width: 100%;
+        border-radius: 5px;
+        display: none;
+    }
+
+    [id^=btn]:checked+ul {
+        display: block;
+    }
+
+    nav .menu:before {
+        position: absolute;
+        content: '';
+        height: 20px;
+        width: 20px;
+        background: #1b1b1b;
+        right: 20px;
+        top: -10px;
+        transform: rotate(45deg);
+        z-index: -1;
+    }
+
+    nav ul li {
+        line-height: 40px;
+        padding: 8px 20px;
+        cursor: pointer;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    }
+
+    nav ul li label {
+        font-size: 18px;
+    }
+
+    nav ul li a {
+        color: white;
+        text-decoration: none;
+        font-size: 18px;
+        display: block;
+    }
+
+    nav ul li a:hover,
+    nav ul li label:hover {
+        color: cyan;
+    }
+
+    nav ul ul {
+        position: static;
+    }
+
+    nav ul ul li {
+        line-height: 30px;
+        padding-left: 30px;
+        border-bottom: none;
+    }
+
+    nav ul ul li a {
+        color: #e6e6e6;
+        font-size: 17px;
+    }
+
+    nav ul li span {
+        font-size: 20px;
+        float: right;
+        margin-top: 10px;
+        padding: 0 10px;
+        transition: 0.5s;
+    }
+
+    nav ul li span.rotate {
+        transform: rotate(-180deg);
+    }
+
+    input {
+        display: none;
+    }
+</style>
+
+</head>
 {% endblock %}
