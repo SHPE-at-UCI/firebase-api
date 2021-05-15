@@ -19,6 +19,6 @@ build/
 
 *.*~
 credentials.json
-sheets/token.pickle
+token.pickle
 
 .DS_Store
