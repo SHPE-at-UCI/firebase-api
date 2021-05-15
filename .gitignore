@@ -18,7 +18,7 @@ build/
 .idea/
 
 *.*~
-sheets/credentials.json
+credentials.json
 sheets/token.pickle
 
 .DS_Store
