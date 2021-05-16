@@ -5,7 +5,7 @@ import requests
 
 
 class UciAuthApi:
-    def __init(self):
+    def __init__(self):
         self.sheetsApi = SheetsApiClient()
 
     def uci_signin(self):
