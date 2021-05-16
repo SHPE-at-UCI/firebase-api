@@ -12,8 +12,14 @@ If you have any questions, comments, or concerns regarding this `README.md`, ema
 
 ## Installation
 
-For this quick setup to work you will need [Python3](https://www.python.org/downloads/) installed on your computer
-You will also need [pip](https://pip.pypa.io/en/stable/) (a Python package manager) to install the dependencies of the project.
+For this quick setup to work you will need:
+- [ ] [Python3](https://www.python.org/downloads/) installed on your computer
+- [ ] [pip](https://pip.pypa.io/en/stable/) (a Python package manager) OR [pipenv](https://pypi.org/project/pipenv/) (a NEWER Python package manager) to install the dependencies of the project.
+
+> 📺 VirtualEnv Is Old - How to Use PipEnv In Less than 5 Minutes
+> 
+> [![VirtualEnv Is Old - How to Use PipEnv In Less than 5 Minutes](https://img.youtube.com/vi/zDYL22QNiWk/0.jpg)](https://www.youtube.com/watch?v=ArDT5NsROMk)
+
 
 1 . Clone this project.
 
