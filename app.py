@@ -75,8 +75,9 @@ def shutdown():
     scheduler.shutdown()
     print("Shutdown.")
 
+# TODO: Separate into Buffer Scheduler Classes,  .load() operations
 
-@app.before_first_request
+# @app.before_first_request
 def init_scheduler():
     print("Server starting up...")
     sheets_api.sign_in()
@@ -133,11 +134,16 @@ def signin_user(user):
 
     return redirect("/thank-you")  # render_template('thank-you.html')
 
+####### TODO: Actual Flask Server Below #########
 
 @app.route("/", methods=("GET", "POST"))
 def index():
     if request.method == "POST":
-        return signin_user(request.form["emailInput"])
+        # TODO: create sheets-user-api.py
+        
+        # return signin_user(request.form["emailInput"])
+        return redirect("/thank-you")
+    
     return render_template("home.html")
 
 
@@ -234,10 +240,20 @@ def logout():
     webauth = "http://login.uci.edu/ucinetid/webauth_logout?" + param
 
     login_status = refresh_login_status()
+
+    # TODO: Fix Login status so users can sign-in with UCI account
+    return "UCI logout failed"
+
     if login_status["valid"]:
         return redirect(webauth)
     else:
         return redirect("/")
+
+
+@app.errorhandler(404)
+def page_not_found(err):
+    # note that we set the 404 status explicitly
+    return str(err), 404
 
 
 if __name__ == "__main__":
