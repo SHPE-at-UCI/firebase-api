@@ -23,8 +23,9 @@ def _read(spreadsheet, sheet, a_range):
     Reads in data from a spreadsheet at a specific sheet and range
     """
     values = service.spreadsheets().values()
-    result = values.get(spreadsheetId=spreadsheet,
-                        range=sheet + "!" + a_range).execute()
+    result = values.get(
+        spreadsheetId=spreadsheet, range=sheet + "!" + a_range
+    ).execute()
     return result.get("values", [])
 
 
@@ -53,8 +54,7 @@ def sign_in():
     global service, creds
     if service is not None:
         if creds.expired:
-            print(
-                "Credentials have expired, refreshing credentials and service")
+            print("Credentials have expired, refreshing credentials and service")
             creds.refresh(Request())
             with open("sheets/token.pickle", "wb") as token:
                 pickle.dump(creds, token)
@@ -75,10 +75,9 @@ def sign_in():
         else:
             print("Performing first time token generation")
             flow = InstalledAppFlow.from_client_secrets_file(
-                "sheets/credentials.json", SCOPES)
-            creds = flow.run_local_server(host="localhost",
-                                          port=8080,
-                                          prompt="consent")
+                "sheets/credentials.json", SCOPES
+            )
+            creds = flow.run_local_server(host="localhost", port=8080, prompt="consent")
             with open("sheets/token.pickle", "wb") as token:
                 pickle.dump(creds, token)
 
@@ -120,6 +119,7 @@ class buffer:
     Special set data structure, to make sure we can add our data and
     return it in a good format for addMultiple
     """
+
     def __init__(self, data=set()):
         self.data = set(data)
 
@@ -136,7 +136,7 @@ class buffer:
         if type(item) == list:
             item = tuple(item)
         elif type(item) != tuple:
-            item = (item, )
+            item = (item,)
         self.data.add(item)
 
     def is_filled(self):
