@@ -38,12 +38,12 @@ jobs:
             # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
             flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
   
-  lint_shell_scripts: 
-    runs-on: ubuntu-latest
-    steps: 
-      - 
-        name: Checkout code
-        uses: actions/checkout@v1
-      - 
-        name: Run Shellcheck
-        uses: azohra/shell-linter@v0.4.0
+#   lint_shell_scripts: 
+#     runs-on: ubuntu-latest
+#     steps: 
+#       - 
+#         name: Checkout code
+#         uses: actions/checkout@v1
+#       - 
+#         name: Run Shellcheck
+#         uses: azohra/shell-linter@v0.4.0
