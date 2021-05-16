@@ -44,15 +44,15 @@ while getopts '?pa:e:l:h:m:' OPTION; do #'?pa:e:r:l:h:m:' OPTION; do
     #     fi;;
     l)
         if [ "$var" -gt 0 ]; then
-            LIMIT=$OPTARG
+            LIMIT=$var
         fi;;
     h)
         if [ "$var" -gt 0 ]||[ "$var" -eq 0 ]&&[ $MINUTES != 0 ]; then
-            HOURS=$OPTARG
+            HOURS=$var
         fi;;
     m)
         if [ "$var" -gt 0 ]||[ "$var" -eq 0 ]&&[ "$HOURS" != 0 ]; then
-            MINUTES=$OPTARG
+            MINUTES=$var
         fi;;
     p)
         print=true;;
