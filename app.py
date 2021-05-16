@@ -1,5 +1,4 @@
 from flask import Flask, render_template, request, redirect
-import requests
 
 
 app = Flask(__name__)
@@ -9,10 +8,10 @@ app = Flask(__name__)
 def index():
     if request.method == "POST":
         # TODO: create sheets-user-api.py
-        
+
         # return signin_user(request.form["emailInput"])
         return redirect("/thank-you")
-    
+
     return render_template("home.html")
 
 
