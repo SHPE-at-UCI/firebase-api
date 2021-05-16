@@ -34,7 +34,7 @@ class SheetsApiClient():
 	    scheduler.add_job(
 	        name="Timed flush",
 	        id="job_1",
-	        func=flush_buffer,
+	        func=self.flush_buffer,
 	        trigger="interval",
 	        hours=int(os.getenv("FLUSH_HOURS")),
 	        minutes=int(os.getenv("FLUSH_MINUTES")),
@@ -42,7 +42,7 @@ class SheetsApiClient():
 	    del os
 
 	    # Schedule shutdown to occur when exiting the app
-	    atexit.register(lambda: shutdown())
+	    atexit.register(lambda: self.shutdown())
 
 	    print("Server started")
 
@@ -87,10 +87,10 @@ class SheetsApiClient():
 	        else:
 	            scheduler.add_job(name="Filled flush",
 	                              id="job_2",
-	                              func=flush_buffer,
+	                              func=self.flush_buffer,
 	                              trigger="date")
 
-	    return redirect("/thank-you")
+	    return "thank you"
 
 
 	# empty a non-empty buffer to sheet
@@ -102,7 +102,7 @@ class SheetsApiClient():
 	        data = data_buffer.process()
 	        try:
 	            running_flush = True
-	            sendData(data)
+	            self.sendData(data)
 	        except Exception as e:
 	            print("Error occured in flush:\n\t", e)
 	            for item in data:
@@ -117,7 +117,7 @@ class SheetsApiClient():
 	        data = data_buffer.process()
 	        try:
 	            running_flush = True
-	            sendData(data)
+	            self.sendData(data)
 	        except Exception as e:
 	            print("Error occured in coalesced flush:\n\t", e)
 	            for item in data:
